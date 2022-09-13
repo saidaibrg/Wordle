@@ -22,6 +22,23 @@ class MainActivity : AppCompatActivity() {
         theWordTextView.setText("the word: "+ theWord)
         //Assigns the random 4-letter word to the temporary textview
 
+        fun checkGuess(guess: String) : String {
+            var result = ""
+            for (i in 0..3) {
+                if (guess[i] == theWord[i]) {
+                    result += "O"
+                }
+                else if (guess[i] in theWord) {
+                    result += "+"
+                }
+                else {
+                    result += "X"
+                }
+            }
+            return result
+        }
+        // Checking the Word Correctness
+
         var counter=1
         val guessEditText = findViewById<EditText>(R.id.guess)
         val button = findViewById<Button>(R.id.button)
@@ -33,44 +50,32 @@ class MainActivity : AppCompatActivity() {
                 if (counter==1){
                         val guess1=findViewById<TextView>(R.id.n1)
                         guess1.setText(strValue)
+                        val guessCheck1=findViewById<TextView>(R.id.n1Check)
+                        guessCheck1.setText(checkGuess(strValue.uppercase()))
+
                     }
                     else if(counter==2){
                         val guess2=findViewById<TextView>(R.id.n2)
                         guess2.setText(strValue)
+                        val guessCheck2=findViewById<TextView>(R.id.n2Check)
+                        guessCheck2.setText(checkGuess(strValue.uppercase()))
                     }
                     else if (counter==3){
                         val guess3=findViewById<TextView>(R.id.n3)
                         guess3.setText(strValue)
+                        val guessCheck3=findViewById<TextView>(R.id.n3Check)
+                        guessCheck3.setText(checkGuess(strValue.uppercase()))
                     }
                 counter++
                 }
-            //CHECK: the TextViews have to be finally working!!!
-
             else{
                 Toast.makeText(it.context, "You have exceeded your number of attempts!", Toast.LENGTH_SHORT).show()
                 button.isEnabled = false
                 button.isClickable=false
                 button.text="Reset"
-                //Alerts the user, disables and greys out the button, changes text to Reset
             }
+            //Alerts the user, disables and greys out the button, changes text to Reset
             })
-
-         fun checkGuess(guess: String) : String {
-            var result = ""
-            theWord=theWord.uppercase()
-            for (i in 0..3) {
-                if (guess[i] == theWord[i]) {
-                    result += "O"
-                }
-                else if (guess[i] in theWord) {
-                        result += "+"
-                    }
-                else {
-                    result += "X"
-                }
-            }
-            return result
-        }
         }
 
         // Textview from EditText is sent to the main Textview
