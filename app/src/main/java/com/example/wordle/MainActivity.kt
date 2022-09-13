@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
         var theWord=FourLetterWordList.FourLetterWordList.getRandomFourLetterWord()
         val theWordTextView=findViewById<TextView>(R.id.textView14)
-        theWordTextView.setText("the word: "+ theWord)
         //Assigns the random 4-letter word to the temporary textview
 
         fun checkGuess(guess: String) : String {
@@ -42,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         var counter=1
         val guessEditText = findViewById<EditText>(R.id.guess)
         val button = findViewById<Button>(R.id.button)
+        val resetButton=findViewById<Button>(R.id.reset)
         val guessTextView=findViewById<TextView>(R.id.textView)
         button.setOnClickListener(View.OnClickListener {
             if(counter<4){
@@ -65,20 +65,19 @@ class MainActivity : AppCompatActivity() {
                         guess3.setText(strValue)
                         val guessCheck3=findViewById<TextView>(R.id.n3Check)
                         guessCheck3.setText(checkGuess(strValue.uppercase()))
+                        Toast.makeText(it.context, "You have exceeded your number of attempts!", Toast.LENGTH_SHORT).show()
+                        button.isEnabled = false
+                        button.isClickable=false
+                        resetButton.visibility=View.VISIBLE
+
+                        theWordTextView.setText(theWord)
                     }
                 counter++
                 }
-            else{
-                Toast.makeText(it.context, "You have exceeded your number of attempts!", Toast.LENGTH_SHORT).show()
-                button.isEnabled = false
-                button.isClickable=false
-                button.text="Reset"
-            }
             //Alerts the user, disables and greys out the button, changes text to Reset
             })
         }
 
-        // Textview from EditText is sent to the main Textview
     }
 
 
