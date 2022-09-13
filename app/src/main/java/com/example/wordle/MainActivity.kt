@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         // Initializes the layout and loads the widgets into the UI
 
         var theWord=FourLetterWordList.FourLetterWordList.getRandomFourLetterWord()
-        val theWordTextView=findViewById<TextView>(R.id.textView14)
+        var theWordTextView=findViewById<TextView>(R.id.textView14)
         //Assigns the random 4-letter word to the temporary textview
 
         fun checkGuess(guess: String) : String {
@@ -68,14 +68,20 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(it.context, "You have exceeded your number of attempts!", Toast.LENGTH_SHORT).show()
                         button.isEnabled = false
                         button.isClickable=false
-                        resetButton.visibility=View.VISIBLE
-
                         theWordTextView.setText(theWord)
+//                        resetButton.isEnabled=true
+//                        resetButton.visibility=View.VISIBLE
+
                     }
                 counter++
                 }
             //Alerts the user, disables and greys out the button, changes text to Reset
             })
+//        resetButton.setOnClickListener(View.OnClickListener {
+//            counter=1
+//            theWord=FourLetterWordList.FourLetterWordList.getRandomFourLetterWord()
+//            theWordTextView=findViewById<TextView>(R.id.textView14)
+//        })
         }
 
     }
